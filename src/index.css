@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.nav-link {
+  @apply text-sm text-gray-700 hover:text-indigo-600 transition;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xsm: 480px;
+  --breakpoint-sm: 720px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1599px;
+  --breakpoint-xl: 1999px;
+}
+
+
+button {
+  cursor: pointer;
+}
