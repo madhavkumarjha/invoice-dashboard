@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { deleteCustomer, listenToCustomers } from "../../firebase/customer";
-import ConfirmDeleteModal from "../../components/modals/DeleteModal";
-
+import ConfirmDeleteModal from "../../components/modals/ConfirmDeleteModal";
 import CustomerModal from "../../components/modals/CustomerForm";
 import toast from "react-hot-toast";
 
