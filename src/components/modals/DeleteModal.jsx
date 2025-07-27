@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { IoClose   } from "react-icons/io5";
-export default function ConfirmDeleteModal({  onClose, onConfirm }) {
+// import React, { useState } from "react";
+import { IoClose } from "react-icons/io5";
+
+export default function ConfirmDeleteModal({ onClose, onConfirm }) {
   // if (!isOpen) return null;
 
   return (
@@ -11,7 +12,11 @@ export default function ConfirmDeleteModal({  onClose, onConfirm }) {
       <div className="relative p-4 w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
           {/* Close button */}
-              <IoClose className="absolute top-3 right-2.5 text-black cursor-pointer text-2xl  " onClick={onClose} title="close"/>
+          <IoClose
+            className="absolute top-3 right-2.5 text-black cursor-pointer text-2xl  "
+            onClick={onClose}
+            title="close"
+          />
 
           {/* Content */}
           <div className="p-4 md:p-5 text-center">

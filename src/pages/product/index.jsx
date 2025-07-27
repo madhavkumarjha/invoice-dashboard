@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { deleteProduct, listenToProducts } from "../../firebase/product";
 import ProductModal from "../../components/modals/ProductForm";
 import toast from "react-hot-toast";
-import ConfirmDeleteModal from "../../components/modals/deleteModal";
+import ConfirmDeleteModal from "../../components/modals/DeleteModal";
 
 function ProductsDashboard() {
   const [isOpen, setIsOpen] = useState(false);

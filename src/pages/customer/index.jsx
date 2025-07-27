@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { deleteCustomer, listenToCustomers } from "../../firebase/customer";
-import DeleteModal from "../../components/modals/deleteModal";
+import ConfirmDeleteModal from "../../components/modals/DeleteModal";
+
 import CustomerModal from "../../components/modals/CustomerForm";
 import toast from "react-hot-toast";
 
@@ -61,33 +62,6 @@ export default function CustomerDashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {customers.map((user) => (
-          // <div
-          //   key={user.customer_id}
-          //   className="bg-white border shadow-sm rounded-lg p-4 hover:shadow-md transition"
-          // >
-          //   <h2 className="text-lg font-semibold text-gray-900">
-          //     {user.full_name}
-          //   </h2>
-          //   <p className="text-gray-500 mb-2">{user.email}</p>
-          //   <div className="flex justify-between items-center mt-4">
-          //     <span className="text-indigo-600 font-semibold">
-          //       {user.phone_number}
-          //     </span>
-          //     <button
-          //       onClick={() => handleEdit(user)}
-          //       className="text-sm text-blue-600 hover:underline"
-          //     >
-          //       Edit
-          //     </button>
-          //     <button
-          //       onClick={() => handleOpenDeleteModal(user)}
-          //       className="text-sm text-blue-600 hover:underline"
-          //     >
-          //       Delete
-          //     </button>
-          //   </div>
-          // </div>
-
           <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <div class="flex flex-col items-center pb-10 pt-2">
               <img
@@ -139,7 +113,7 @@ export default function CustomerDashboard() {
         />
       )}
       {isDeleteMode && (
-        <DeleteModal
+        <ConfirmDeleteModal
           onClose={handleCloseDeleteModal}
           // isOpen={isOpen}
           onConfirm={handleDelete}

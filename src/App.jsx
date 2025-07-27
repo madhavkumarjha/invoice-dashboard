@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import Login from "./auth/Login";
 import { AuthProvider } from "./contexts/authContext";
