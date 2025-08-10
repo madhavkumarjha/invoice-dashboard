@@ -10,7 +10,7 @@ import { db } from "./firebaseConfig";
 
 
 // Firestore collection reference
-const productsCollection = collection(db, "food-items");
+const productsCollection = collection(db, "products");
 
 // Create a new product
 async function createProduct(product) {
@@ -39,12 +39,11 @@ async function updateProduct(id, updatedData) {
   if (!id) throw new Error("No product ID provided");
 
   try {
-    const docRef = doc(db, "food-items", id);
+    const docRef = doc(db, "products", id);
     await updateDoc(docRef, updatedData);
     console.log("Product updated:", id, updatedData);
   } catch (error) {
-    console.log(updatedData);
-    
+    // console.log(updatedData);
     console.error("Error updating product:", error);
     throw error;
   }
@@ -54,7 +53,7 @@ async function updateProduct(id, updatedData) {
 // Delete a product by ID
 async function deleteProduct(id) {
   try {
-    const docRef = doc(db, "food-items", id);
+    const docRef = doc(db, "products", id);
     await deleteDoc(docRef);
     console.log("Product deleted : ", id);
   } catch (error) {

@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
-export default function ConfirmDeleteModal({ onClose, onConfirm }) {
+export default function ConfirmDeleteModal({ onClose, onConfirm,type }) {
   // if (!isOpen) return null;
 
   return (
@@ -36,7 +36,7 @@ export default function ConfirmDeleteModal({ onClose, onConfirm }) {
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this product?
+              Are you sure you want to delete this {type}?
             </h3>
             <button
               onClick={onConfirm}

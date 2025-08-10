@@ -21,13 +21,13 @@ function Home() {
         you are now logged in.
       </div>
       {/* <button onClick={uploadJsonData}>Upload</button> */}
-<InVoice/>
+{/* <InVoice/> */}
 {/* <UploadImage/> */}
-      <div className="flex flex-row items-center justify-between">
+      {/* <div className="flex flex-row items-center justify-between">
         {cardType.map((type, index) => (
           <Card type={type} key={index} color={color[index]} />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

@@ -11,7 +11,7 @@ export default function ProductModal({ onClose, product }) {
   const [formData, setFormData] = useState({
     title: "",
     source: "",
-    price: "",
+    price: 0,
     imageUrl: "",
     link: "",
   });
@@ -21,7 +21,7 @@ export default function ProductModal({ onClose, product }) {
       setFormData({
         title: product.title || "",
         source: product.source || "",
-        price: product.price || "",
+        price: product.price || 0,
         imageUrl: product.imageUrl || "",
         link: product.link || "",
       });
@@ -69,7 +69,7 @@ export default function ProductModal({ onClose, product }) {
       aria-hidden="true"
       className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
     >
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className="relative p-4 w-full max-w-md max-h-full overflow-y-auto scroll-smooth ">
         {/* Modal content */}
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
           {/* Modal header */}
@@ -85,7 +85,7 @@ export default function ProductModal({ onClose, product }) {
           </div>
 
           {/* Modal body */}
-          <form className="p-4 md:p-5">
+          <form className="p-4 md:p-5 ">
             <div className="flex flex-col gap-4 mb-4">
               <div className="">
                 <label

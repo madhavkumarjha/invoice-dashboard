@@ -12,7 +12,7 @@ export default function CustomerModal({ onClose, customer }) {
     full_name: "",
     email: "",
     profile: "",
-    phone_number: "",
+    phone_number: null,
     address: "",
   });
 
@@ -22,21 +22,24 @@ export default function CustomerModal({ onClose, customer }) {
         full_name: customer.full_name || "",
         email: customer.email || "",
         profile: customer.profile || "",
-        phone_number: customer.phone_number || "",
+        phone_number: customer.phone_number || null,
         address: customer.address || "",
       });
     }
   }, []);
 
+  const validatePhoneNumber = (phone) => {
+    const numeric = phone.replace(/\D/g, "");
+    if (numeric.length !== 10) {
+      toast.error("Please enter a valid 10-digit phone number");
+      return false;
+    }
+    return true;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "phone_number") {
-      const numeric = value.replace(/\D/g, "");
-      if (numeric.length > 10) return; // max 10 digits
-      setFormData((prev) => ({ ...prev, [name]: numeric }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleImageUpload = (url) => {
@@ -48,6 +51,8 @@ export default function CustomerModal({ onClose, customer }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validatePhoneNumber(formData.phone_number)) return;
 
     try {
       if (!isEditMode) {
@@ -75,7 +80,7 @@ export default function CustomerModal({ onClose, customer }) {
       aria-hidden="true"
       className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
     >
-      <div className="relative p-4 w-full max-w-md max-h-full">
+      <div className="relative p-4 w-full max-w-md max-h-full overflow-y-auto scroll-smooth">
         {/* Modal content */}
         <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
           {/* Modal header */}
@@ -139,7 +144,7 @@ export default function CustomerModal({ onClose, customer }) {
                 <input
                   type="tel"
                   pattern="[0-9]{10}"
-                  title="Enter a 10-digit phone_number number"
+                  title="Enter a 10-digit phone number"
                   name="phone_number"
                   id="phone_number"
                   value={formData.phone_number}
