@@ -1,15 +1,11 @@
-import React from "react";
 import { useAuth } from "../contexts/authContext/index";
-// import TodoList from "../todoList";
-import Card from "../components/card/Card";
-import InVoice from "./invoice";
-// import UploadImage from "../components/FileUrl";
+import IncomeGraph from "../components/GraphInvoice";
 
 
 function Home() {
   const { currentUser } = useAuth();
-  const cardType = ["Invoice", "Customer"];
-  const color = ["red", "blue"];
+  console.log("currentUser", currentUser);
+  
 
 
 
@@ -20,14 +16,7 @@ function Home() {
         {currentUser.displayName ? currentUser.displayName : currentUser.email},
         you are now logged in.
       </div>
-      {/* <button onClick={uploadJsonData}>Upload</button> */}
-{/* <InVoice/> */}
-{/* <UploadImage/> */}
-      {/* <div className="flex flex-row items-center justify-between">
-        {cardType.map((type, index) => (
-          <Card type={type} key={index} color={color[index]} />
-        ))}
-      </div> */}
+      <IncomeGraph />
     </>
   );
 }

@@ -20,8 +20,8 @@ function AddInvoice() {
     total_price: 0,
     paid_date: "",
     items: [{ id: "", title: "", quantity: 1, price: 0 }],
-    status: "Pending",
-    payment_type: "Cash",
+    status: "",
+    payment_type: "",
   });
 
   const [isCustomerModalOpen, setIsCustomerModalOpen] = useState(false);
@@ -136,6 +136,7 @@ function AddInvoice() {
         ...invoice, // keep all existing invoice data
         invoice_no: nextInvoiceNo, // replace only invoice number
         total_price,
+        payment_type: invoice.status !== "Unpaid" ? invoice.payment_type : "",
         paid_date: invoice.status === "Paid" ? formatCurrentDate() : "",
       };
 
@@ -154,8 +155,8 @@ function AddInvoice() {
         total_price: 0,
         paid_date: "",
         items: [{ id: "", title: "", quantity: 1, price: 0 }],
-        status: "Pending",
-        payment_type: "Cash",
+        status: "",
+        payment_type: "",
       });
     } catch (error) {
       toast.error("Error in creating invoice");
@@ -293,39 +294,44 @@ function AddInvoice() {
           </button>
           <div className="flex items-center gap-4 mt-4">
             <select
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
-              name="payment_type"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
               onChange={handleChange}
-              // defaultValue={invoice.payment_type}
-              value={invoice.payment_type}
-            >
-              {["UPI", "Card", "Cash"].map((mode, id) => (
-                <option
-                  value={mode}
-                  key={id}
-                  className="capitalize cursor-pointer hover:bg-gray-100"
-                >
-                  {mode}
-                </option>
-              ))}
-            </select>
-            <select
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
-              onChange={handleChange}
-              value={invoice.status}
+              value={invoice.status || ""}
               name="status"
-              // defaultValue={invoice.status}
             >
+              <option value="" disabled>
+                Select status
+              </option>
               {["Paid", "Unpaid", "Pending"].map((status, id) => (
-                <option
-                  value={status}
-                  key={id}
-                  className="capitalize cursor-pointer hover:bg-gray-100"
-                >
+                <option value={status} key={id} className="capitalize">
                   {status}
                 </option>
               ))}
             </select>
+
+            {invoice.status !== "Unpaid" && (
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
+                name="payment_type"
+                onChange={handleChange}
+                // defaultValue={invoice.payment_type}
+                value={invoice.payment_type||""}
+              >
+                <option value="" disabled> Select Payment Type</option>
+                {["UPI", "Card", "Cash"].map((mode, id) => (
+                  <option
+                    value={mode}
+                    key={id}
+                    className="capitalize cursor-pointer hover:bg-gray-100"
+                  >
+                    {mode}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 gap-4">

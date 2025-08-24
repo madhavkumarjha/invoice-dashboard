@@ -10,20 +10,20 @@ export default function ProductModal({ onClose, product }) {
   // console.log(product);
   const [formData, setFormData] = useState({
     title: "",
-    source: "",
+    description: "",
     price: 0,
     imageUrl: "",
-    link: "",
+    // link: "",
   });
 
   useEffect(() => {
     if (isEditMode) {
       setFormData({
         title: product.title || "",
-        source: product.source || "",
+        description: product.description || "",
         price: product.price || 0,
         imageUrl: product.imageUrl || "",
-        link: product.link || "",
+        // link: product.link || "",
       });
     }
   }, []);
@@ -107,16 +107,16 @@ export default function ProductModal({ onClose, product }) {
               </div>
               <div className="">
                 <label
-                  htmlFor="source"
+                  htmlFor="description"
                   className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Source
+                  description
                 </label>
-                <input
+                <textarea
                   type="text"
-                  name="source"
-                  id="source"
-                  value={formData.source}
+                  name="description"
+                  id="description"
+                  value={formData.description}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="product stock location"
@@ -152,7 +152,7 @@ export default function ProductModal({ onClose, product }) {
                 />
                 <ImageUploader onUpload={handleImageUpload} />
               </div>
-              <div className="col-span-2">
+              {/* <div className="col-span-2">
                 <label
                   htmlFor="link"
                   className="block mb-2 text-start text-sm font-medium text-gray-900 dark:text-white"
@@ -168,7 +168,7 @@ export default function ProductModal({ onClose, product }) {
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="product link"
                 ></input>
-              </div>
+              </div> */}
             </div>
             <button
               type="submit"

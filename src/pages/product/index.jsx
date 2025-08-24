@@ -99,20 +99,23 @@ function ProductsDashboard() {
             {/* Details */}
             <div className="px-4 pb-4 sm:px-5 sm:pb-5">
               <h5 className="text-lg sm:text-xl font-semibold tracking-tight text-gray-900 dark:text-white break-words">
-                {item.title}
+                {item.title.slice(0, 30)}...
               </h5>
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 my-2">
-                <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="flex flex-col gap-2 my-2">
+                <span className="text-justify text-gray-900 dark:text-white">
+                  {item.description.slice(0, 100)}...
+                </span>
+                <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-right">
                   ₹{item.price}
                 </span>
-                <a
+                {/* <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={item.link}
                   className="w-full sm:w-auto text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Know more
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

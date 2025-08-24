@@ -11,19 +11,16 @@ import {
   updateInvoiceStatusAndDueDate,
 } from "../../firebase/invoice";
 import { dateFormat } from "../../components/helper";
+import { PDFViewer } from "@react-pdf/renderer";
 import toast from "react-hot-toast";
+import InvoicePDF from "../../components/InvoiceView";
 
 function InVoice() {
+  // upload json to firestore database
   //  const handleUpload = async () => {
   //     try {
-  //       const products = data.products;
 
-  //       if (!products || !Array.isArray(products)) {
-  //         alert("No products found in JSON!");
-  //         return;
-  //       }
-
-  //       for (const item of products) {
+  //       for (const item of data) {
   //         console.log("Uploading product:", item);
   //         await addDoc(collection(db, "products"), item); // auto-generates doc ID
   //       }
@@ -39,6 +36,7 @@ function InVoice() {
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [deleteToggle, setDeleteToggle] = useState(false);
   const [filter, setFilter] = useState("All");
+  const [pdfOpen, setPdfOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = listenToInvoices(setInvoices);
@@ -50,6 +48,16 @@ function InVoice() {
   function deleteToggleHandler(invoice) {
     setSelectedInvoice(invoice);
     setDeleteToggle(true);
+  }
+
+  function pdfToggleHandler(invoice) {
+    setSelectedInvoice(invoice);
+    setPdfOpen(true);
+  }
+
+  function closePdfViewer() {
+    setPdfOpen(false);
+    setSelectedInvoice(null);
   }
 
   const filteredInvoices = invoices.filter((invoice) => {
@@ -94,6 +102,7 @@ function InVoice() {
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
           Invoices
         </h1>
+
         <Link
           to="/invoice/create"
           className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-md shadow hover:scale-105 transition"
@@ -149,6 +158,7 @@ function InVoice() {
             <div className="flex gap-2 mt-4">
               <button
                 type="button"
+                onClick={() => pdfToggleHandler(invoice)}
                 className="text-indigo-600 text-sm hover:underline"
               >
                 View
@@ -184,6 +194,29 @@ function InVoice() {
           type="invoice"
         />
       )}
+
+      {pdfOpen && selectedInvoice && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg shadow-lg w-[95%] h-[90%] max-w-6xl relative">
+      {/* Close Button */}
+      <button
+        onClick={() => setPdfOpen(false)}
+        className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded"
+      >
+        ✕
+      </button>
+
+      {/* PDF Viewer */}
+      <PDFViewer
+        style={{ width: "100%", height: "100%" }}
+        showToolbar={true}
+      >
+        <InvoicePDF data={selectedInvoice} />
+      </PDFViewer>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
